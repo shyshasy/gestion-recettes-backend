@@ -1,16 +1,13 @@
-const express = require('express');
+// index.js
+import express from 'express';
+import recetteRoutes from './src/routes/recetteRoutes.js';
+
 const app = express();
-const port = 3020;
+const PORT = process.env.PORT || 3200; // Changez le port ici
 
-// Middleware pour gérer les requêtes JSON
 app.use(express.json());
+app.use('/api', recetteRoutes);
 
-// Route de base
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-// Démarrer le serveur
-app.listen(port, () => {
-  console.log(`Serveur Express démarré sur http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
