@@ -8,7 +8,8 @@ const connPool = mysql.createPool({
   database: 'gestion_recette',
   waitForConnections: true,
   connectionLimit: 100,
-  connectTimeout: false
+  connectTimeout: false,
+  queueLimit: 0,
 });
 
 connPool.getConnection().then(() => {
