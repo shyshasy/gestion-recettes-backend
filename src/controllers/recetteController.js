@@ -1,4 +1,5 @@
-import db from '../config/db.js';
+import db from '../config-copy/db-sy.js';
+import db from '../config-copy/db-sy.js'
 
 // Récupérer toutes les recettes
 export const getAllRecipes = async (req, res) => {
