@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "d7fb39f7-549e-4f76-9075-4bffb4e692bf",
+		"name": "gestion_recette",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38098614"
+	},
+	"item": [
+		{
+			"name": "Get_Recipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3200/"
+			},
+			"response": []
+		},
+		{
+			"name": "POST_Recipes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "PUT_Recipes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE_Recipes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
