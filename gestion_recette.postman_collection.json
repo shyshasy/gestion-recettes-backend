@@ -2,16 +2,56 @@
 	"info": {
 		"_postman_id": "d7fb39f7-549e-4f76-9075-4bffb4e692bf",
 		"name": "gestion_recette",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "38098614"
 	},
 	"item": [
 		{
 			"name": "Get_Recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"{\r",
+							"    \"title\": \"Titre de la recette\",\r",
+							"    \"description\": \"Description de la recette\",\r",
+							"    \"date\": \"2024-09-15\"\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3200/"
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"\",\r\n  \"description\":12,\r\n  \"date\": \"2024-09-06\"\r\n}\r\n\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3500/api/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"api",
+						"recipes"
+					]
+				}
 			},
 			"response": []
 		},
