@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "start": "nodemon index.js"
   },
   "author": "Mamoudou Ba",
@@ -17,5 +17,10 @@
     "mysql2": "^3.11.2",
     "nodemon": "^3.1.4",
     "promise": "^8.3.0"
+  },
+  "devDependencies": {
+    "jasmine": "^5.3.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jest": "^29.7.0"
   }
 }

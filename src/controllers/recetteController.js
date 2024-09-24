@@ -1,5 +1,5 @@
 import { body, param, validationResult } from 'express-validator';
-import db from '../config/db.js';
+import Recipe from '../models/recipeModel.js';  // On utilise la classe Recipe avec méthodes statiques
 
 // Middleware de validation des erreurs
 const handleValidationErrors = (req, res, next) => {
@@ -13,8 +13,8 @@ const handleValidationErrors = (req, res, next) => {
 // Récupérer toutes les recettes
 export const getAllRecipes = async (req, res) => {
     try {
-        const [results] = await db.query('SELECT * FROM recipes');
-        res.json(results);
+        const recipes = await Recipe.getAllRecipes();
+        res.json(recipes);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -22,16 +22,16 @@ export const getAllRecipes = async (req, res) => {
 
 // Récupérer une recette par ID avec validation de l'ID
 export const getRecipeById = [
-    param('id').isInt().withMessage('ID must be an integer'),
+    param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),  // Validation améliorée pour s'assurer que l'ID est un entier positif
     handleValidationErrors,
     async (req, res) => {
         const { id } = req.params;
         try {
-            const [results] = await db.query('SELECT * FROM recipes WHERE id = ?', [id]);
-            if (results.length === 0) {
+            const recipe = await Recipe.getRecipeById(id);
+            if (!recipe.length) {
                 return res.status(404).json({ message: 'Recipe not found' });
             }
-            res.json(results[0]);
+            res.json(recipe[0]);
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
@@ -47,8 +47,14 @@ export const createRecipe = [
     async (req, res) => {
         const { title, description, date } = req.body;
         try {
-            const [result] = await db.query('INSERT INTO recipes (title, description, date) VALUES (?, ?, ?)', [title, description, date]);
-            res.status(201).json({ id: result.insertId, title, description, date });
+            const id = await Recipe.createRecipe(title, description, date);
+            res.status(201).json({
+                message: 'Recipe successfully created!',
+                id,
+                title,
+                description,
+                date
+            });
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
@@ -57,7 +63,7 @@ export const createRecipe = [
 
 // Mettre à jour une recette existante avec validation
 export const updateRecipe = [
-    param('id').isInt().withMessage('ID must be an integer'),
+    param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),
     body('title').optional().isString().withMessage('Title must be a string'),
     body('description').optional().isString().withMessage('Description must be a string'),
     body('date').optional().isDate().withMessage('Date must be a valid date'),
@@ -66,8 +72,8 @@ export const updateRecipe = [
         const { id } = req.params;
         const { title, description, date } = req.body;
         try {
-            const [result] = await db.query('UPDATE recipes SET title = ?, description = ?, date = ? WHERE id = ?', [title, description, date, id]);
-            if (result.affectedRows === 0) {
+            const affectedRows = await Recipe.updateRecipe(id, title, description, date);
+            if (affectedRows === 0) {
                 return res.status(404).json({ message: 'Recipe not found' });
             }
             res.json({ message: 'Recipe updated successfully' });
@@ -79,13 +85,13 @@ export const updateRecipe = [
 
 // Supprimer une recette avec validation de l'ID
 export const deleteRecipe = [
-    param('id').isInt().withMessage('ID must be an integer'),
+    param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),
     handleValidationErrors,
     async (req, res) => {
         const { id } = req.params;
         try {
-            const [result] = await db.query('DELETE FROM recipes WHERE id = ?', [id]);
-            if (result.affectedRows === 0) {
+            const affectedRows = await Recipe.deleteRecipe(id);
+            if (affectedRows === 0) {
                 return res.status(404).json({ message: 'Recipe not found' });
             }
             res.json({ message: 'Recipe deleted successfully' });
