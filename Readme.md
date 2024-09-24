@@ -142,6 +142,19 @@ npm start
 npm start
 ```
 
+
+## Les étapes pour construire et lancer le conteneur Docker:
+```bash
+docker compose up --build
+```
+```bash
+docker exec -it gestion_recettes mysql -u root -p
+```
+## Execusion des tests unitaire
+```bash
+npm test
+```
+
 # Auteurs
 
 [Mamoudou Adama Ba ](https://github.com/Mamoudou12)
