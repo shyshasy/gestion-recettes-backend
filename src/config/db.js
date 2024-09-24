@@ -3,9 +3,9 @@ import mysql from 'mysql2/promise';
 // Create the connection pool. The pool-specific settings are the defaults
 const connPool = mysql.createPool({
   host: 'localhost',
-  user: 'test_user',
-  password: 'password123',
-  database: 'gestion_recette',
+  user: 'root',
+  password: 'shyshamoi',
+  database: 'api_gestion_recette',
   waitForConnections: true,
   connectionLimit: 100,
   connectTimeout: false,
@@ -13,6 +13,6 @@ const connPool = mysql.createPool({
 });
 
 connPool.getConnection().then(() => {
-    console.log("CONNECTED")
-})
+  console.log('CONNECTED');
+});
 export default connPool;
