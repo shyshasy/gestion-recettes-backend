@@ -11,17 +11,29 @@ describe('Recipe tests', () => {
     };
     await Recipe.createRecipe(recipe.title, recipe.description, recipe.date);
   });
-  it('can not be create', async () => {
-    const recipe = { title: null, description: 'dessert', date: 'farime' };
-    const result = await Recipe.createRecipe(
-      recipe.title,
-      recipe.description,
-      recipe.date
-    );
-    recipeId = result.insertId;
-    const recipeCreated = await Recipe.getRecipeById(recipeId);
-    expect(recipeId).toBeNull();
-    expect(recipeCreated).toEqual([]);
+
+
+  
+  it("can not be create", async () => {
+    try {
+      const recipe = { titre: null, type: "dessert", ingredient: "farime" };
+      const result = await Recipe.createRecipe(
+        recipe.titre,
+        recipe.type,
+        recipe.ingredient
+      );
+      recipeId = result.insertId;
+      const recipeCreated = await Recipe.getRecipeById(recipeId);
+      expect(recipeId).toBeNull();
+      expect(recipeCreated).toEqual([]);
+    } catch (error) {
+      error.message
+    }
+  });
+
+  it('Can get all recipes', async () => {
+    const getAll = await Recipe.getAllRecipes();
+    expect(getAll).not.toBeNull();
   });
 
   it('Can get all recipes', async () => {

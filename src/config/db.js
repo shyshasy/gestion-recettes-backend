@@ -1,11 +1,13 @@
 import mysql from 'mysql2/promise';
+import dotenv  from 'dotenv';
 
+dotenv.config();
 // Create the connection pool. The pool-specific settings are the defaults
 const connPool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'shyshamoi',
-  database: 'api_gestion_recette',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 100,
   connectTimeout: false,
