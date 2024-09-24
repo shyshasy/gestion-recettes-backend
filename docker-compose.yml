@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    env_file: .env                        # Fichier d'environnement pour le service API
+    image: api_gestion_recette            # Nom de l'image Docker
+    container_name: api_gestion_recette_app  # Nom du conteneur pour l'application
+    build: .                              # Construit l'image à partir du Dockerfile
+    volumes:
+      - .:/usr/src/app                    # Monte le répertoire courant dans le conteneur
+    ports:
+      - '3050:4000'                       # Redirige le port 4000 du conteneur vers le port 3050 de l'hôte
+    depends_on:
+      - db                                # Dépendance pour le service MySQL
+    networks:
+      - my_network                        # Réseau personnalisé
+
+  db:
+    env_file: .env                        # Fichier d'environnement pour MySQL
+    image: mysql:latest                   # Image MySQL officielle
+    restart: always                       # Redémarre en cas d'échec
+    container_name: api_gestion_recette_db  # Nom unique pour le conteneur MySQL
+    volumes:
+      - db-data:/var/lib/mysql            # Volume pour les données MySQL
+    ports:
+      - '3098:3306'                       # Redirige le port 3306 du conteneur vers le port 3098 de l'hôte
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - my_network
+
+volumes:
+  db-data:
+
+networks:
+  my_network:

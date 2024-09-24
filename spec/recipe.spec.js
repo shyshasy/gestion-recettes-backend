@@ -37,7 +37,7 @@ describe('Recipe tests', () => {
   });
 
   it('Can get all recipes', async () => {
-    const getAll = await Recipe.getRecipeById(100);
+    const getAll = await Recipe.getRecipeById(28);
     expect(getAll).not.toBeNull();
   });
 
