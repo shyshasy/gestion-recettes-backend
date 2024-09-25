@@ -3,7 +3,7 @@ import express from 'express';
 import recetteRoutes from './src/routes/recetteRoutes.js';
 
 const app = express();
-const PORT = process.env.PORT || 3500; // Changez le port ici
+const PORT = process.env.PORT || 4000; // Changez le port ici
 
 app.use(express.json());
 app.use('/api', recetteRoutes);
