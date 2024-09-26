@@ -3,24 +3,25 @@ import Recipe from '../src/models/recipeModel.js';
 describe('Recipe tests', () => {
   let recipeId = null;
 
-  it('can be create', async () => {
-    const recipe = {
-      title: 'crepe',
-      description: 'sdkqsd',
-      date: '2024-03-05',
-    };
-    await Recipe.createRecipe(recipe.title, recipe.description, recipe.date);
+  it("can be create", async () => {
+    const recipe = { title: "crepe", description: "dessert", date: "2024-6-9" };
+    const result = await Recipe.createRecipe(
+      recipe.title,
+      recipe.description,
+      recipe.date
+    );
+    expect(result).not.toBeNull();
   });
 
 
   
   it("can not be create", async () => {
     try {
-      const recipe = { titre: null, type: "dessert", ingredient: "farime" };
+      const recipe = { title: null, description: "dessert", date: "2024-09-08" };
       const result = await Recipe.createRecipe(
-        recipe.titre,
-        recipe.type,
-        recipe.ingredient
+        recipe.title,
+        recipe.description,
+        recipe.date
       );
       recipeId = result.insertId;
       const recipeCreated = await Recipe.getRecipeById(recipeId);
@@ -57,6 +58,6 @@ describe('Recipe tests', () => {
   it('can delete a recipe', async () => {
     await Recipe.deleteRecipe(110);
     const deletedRecipe = await Recipe.getRecipeById(110);
-    expect(deletedRecipe).toBeNull(); // Vérifie que la recette a bien été supprimée
+    expect(deletedRecipe).toBeNull(); 
   });
 });
