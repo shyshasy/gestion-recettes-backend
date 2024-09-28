@@ -20,7 +20,6 @@ export const getAllRecipes = async (req, res) => {
   }
 };
 
-// Récupérer une recette par ID avec validation de l'ID
 export const getRecipeById = [
   param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'), // Validation améliorée pour s'assurer que l'ID est un entier positif
   handleValidationErrors,
@@ -28,15 +27,17 @@ export const getRecipeById = [
     const { id } = req.params;
     try {
       const recipe = await Recipe.getRecipeById(id);
-      if (!recipe.length) {
+      // Vérification si la recette est null
+      if (!recipe) {
         return res.status(404).json({ message: 'Recipe not found' });
       }
-      res.json(recipe[0]);
+      res.json(recipe); // La recette est déjà un objet, pas besoin de recipe[0]
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
   },
 ];
+
 
 // Créer une nouvelle recette avec validation des champs
 export const createRecipe = [

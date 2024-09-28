@@ -7,14 +7,12 @@ class Recipe {
     return results;
   }
 
-  // Récupérer une recette par ID
   static async getRecipeById(id) {
-    const [results] = await db.query('SELECT * FROM recipes WHERE id = ?', [
-      id,
-    ]);
+    const [results] = await db.query('SELECT * FROM recipes WHERE id = ?', [id]);
+    // Retourne l'objet directement s'il existe, sinon null
     return results.length > 0 ? results[0] : null;
   }
-
+  
   // Créer une nouvelle recette
   static async createRecipe(title, description, date) {
     const [result] = await db.query(
