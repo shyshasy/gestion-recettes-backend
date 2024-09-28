@@ -1,7 +1,6 @@
 import { body, param, validationResult } from 'express-validator';
-import Recipe from '../models/recipeModel.js'; // On utilise la classe Recipe avec méthodes statiques
+import Recipe from '../models/RecipeModel.js';
 
-// Middleware de validation des erreurs
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -10,7 +9,6 @@ const handleValidationErrors = (req, res, next) => {
   next();
 };
 
-// Récupérer toutes les recettes
 export const getAllRecipes = async (req, res) => {
   try {
     const recipes = await Recipe.getAllRecipes();
@@ -21,25 +19,23 @@ export const getAllRecipes = async (req, res) => {
 };
 
 export const getRecipeById = [
-  param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'), // Validation améliorée pour s'assurer que l'ID est un entier positif
+  param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),
   handleValidationErrors,
   async (req, res) => {
     const { id } = req.params;
     try {
       const recipe = await Recipe.getRecipeById(id);
-      // Vérification si la recette est null
+
       if (!recipe) {
         return res.status(404).json({ message: 'Recipe not found' });
       }
-      res.json(recipe); // La recette est déjà un objet, pas besoin de recipe[0]
+      res.json(recipe);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
   },
 ];
 
-
-// Créer une nouvelle recette avec validation des champs
 export const createRecipe = [
   body('title')
     .isString()
@@ -70,7 +66,6 @@ export const createRecipe = [
   },
 ];
 
-// Mettre à jour une recette existante avec validation
 export const updateRecipe = [
   param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),
   body('title').optional().isString().withMessage('Title must be a string'),
@@ -100,7 +95,6 @@ export const updateRecipe = [
   },
 ];
 
-// Supprimer une recette avec validation de l'ID
 export const deleteRecipe = [
   param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),
   handleValidationErrors,
