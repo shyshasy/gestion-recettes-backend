@@ -1,10 +1,10 @@
-import Recipe from '../src/models/recipeModel.js';
+import Recipe from '../src/models/RecipeModel.js';
 
 describe('Recipe tests', () => {
   let recipeId = null;
 
-  it("can be create", async () => {
-    const recipe = { title: "crepe", description: "dessert", date: "2024-6-9" };
+  it('can be create', async () => {
+    const recipe = { title: 'crepe', description: 'dessert', date: '2024-6-9' };
     const result = await Recipe.createRecipe(
       recipe.title,
       recipe.description,
@@ -13,11 +13,13 @@ describe('Recipe tests', () => {
     expect(result).not.toBeNull();
   });
 
-
-  
-  it("can not be create", async () => {
+  it('can not be create', async () => {
     try {
-      const recipe = { title: null, description: "dessert", date: "2024-09-08" };
+      const recipe = {
+        title: null,
+        description: 'dessert',
+        date: '2024-09-08',
+      };
       const result = await Recipe.createRecipe(
         recipe.title,
         recipe.description,
@@ -28,7 +30,7 @@ describe('Recipe tests', () => {
       expect(recipeId).toBeNull();
       expect(recipeCreated).toEqual([]);
     } catch (error) {
-      error.message
+      error.message;
     }
   });
 
@@ -38,7 +40,7 @@ describe('Recipe tests', () => {
   });
 
   it('Can get a recipes by id', async () => {
-    const getAll = await Recipe.getRecipeById(72);
+    const getAll = await Recipe.getRecipeById(3);
     expect(getAll).not.toBeNull();
   });
 
@@ -58,6 +60,6 @@ describe('Recipe tests', () => {
   it('can delete a recipe', async () => {
     await Recipe.deleteRecipe(110);
     const deletedRecipe = await Recipe.getRecipeById(110);
-    expect(deletedRecipe).toBeNull(); 
+    expect(deletedRecipe).toBeNull();
   });
 });
