@@ -6,6 +6,8 @@ Cette API permet de gérer des recettes de cuisine, incluant la création, la le
 
 - Node.js (version 14+ recommandée)
 - MySQL (version 5.7+)
+- Postman (pour les tester de l'API)
+- Docker (pour la containerisation)
 
 # Installation
 
