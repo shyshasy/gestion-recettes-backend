@@ -147,7 +147,7 @@ npm start
 ## Les étapes pour construire et lancer le conteneur Docker:
 
 ```bash
-docker compose up --build
+docker compose up 
 ```
 
 ```bash
