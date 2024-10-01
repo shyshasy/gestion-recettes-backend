@@ -14,18 +14,18 @@ class Recipe {
     return results.length > 0 ? results[0] : null;
   }
 
-  static async createRecipe(title, description, date) {
+  static async createRecipe(title,  ingredients, type) {
     const [result] = await db.query(
-      'INSERT INTO recipes (title, description, date) VALUES (?, ?, ?)',
-      [title, description, date]
+      'INSERT INTO recipes (title,  ingredients,type) VALUES (?, ?, ?)',
+      [title,  ingredients, type]
     );
     return result.insertId;
   }
 
-  static async updateRecipe(id, title, description, date) {
+  static async updateRecipe(id, title,  ingredients, type) {
     const [result] = await db.query(
-      'UPDATE recipes SET title = ?, description = ?, date = ? WHERE id = ?',
-      [title, description, date, id]
+      'UPDATE recipes SET title = ?,  ingredients = ?, type = ? WHERE id = ?',
+      [title, ingredients, type,id]
     );
     return result.affectedRows;
   }
