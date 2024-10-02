@@ -39,8 +39,8 @@ npm install
 CREATE TABLE recipes (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
-  date DATE NOT NULL
+  type TEXT NOT NULL,
+  ingredients NOT NULL
 );
 ```
 
@@ -62,16 +62,20 @@ npm start
 [
 {
 "id": 1,
-"title": "Lasagnes",
-"description": "Délicieuses lasagnes faites maison",
-"date": "2023-08-20"
-},
+ 
+  "title": "Titre de la recette",
+  "type": "entrèe",
+  "ingredients": "piment",
+ 
+  }
 {
 "id": 2,
-"title": "Tarte aux pommes",
-"description": "Tarte classique avec des pommes",
-"date": "2023-08-15"
-}
+ 
+  "title": "Titre de la recette",
+  "type": "entrèe",
+  "ingredients": "piment",
+ 
+  }
 ]
 
 2. Récupérer une recette par ID
@@ -84,8 +88,9 @@ npm start
   {
   "id": 1,
   "title": "Lasagnes",
-  "description": "Délicieuses lasagnes faites maison",
-  "date": "2023-08-20"
+
+  "type": "entrèe",
+  "ingredients": "piment",
   }
 
 3. Créer une nouvelle recette
@@ -95,8 +100,9 @@ npm start
 - Corps :
   {
   "title": "Titre de la recette",
-  "description": "Description de la recette",
-  "date": "YYYY-MM-DD"
+  "type": "entrèe",
+  "ingredients": "piment",
+ 
   }
 
 4.  Mettre à jour une recette
@@ -106,11 +112,12 @@ npm start
 - Paramètres : id (Requis, entier)
 - Corps :
 
-{
-"title": "Titre mis à jour",
-"description": "Description mise à jour",
-"date": "YYYY-MM-DD"
-}
+ {
+  "title": "Titre de la recette",
+  "type": "entrèe",
+  "ingredients": "piment",
+ 
+  }
 
 - Exemple de réponse :
 
