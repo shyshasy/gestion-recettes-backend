@@ -45,7 +45,6 @@ export const createRecipe = [
     .isLength({ min: 5, max: 100 })
     .withMessage('Title must be between 5 and 100 characters long')
     .custom(async (value) => {
-      // Check for unique title logic here
       const exists = await Recipe.findByTitle(value);
       if (exists) {
         throw new Error('Title must be unique');
@@ -59,26 +58,26 @@ export const createRecipe = [
     .withMessage('Ingredients are required')
     .isLength({ min: 10, max: 500 })
     .withMessage('Ingredients must be between 10 and 500 characters long'),
-  body('recipeType')
+  body('type') // Correction ici
     .isString()
     .withMessage('Recipe type must be a string')
     .notEmpty()
     .withMessage('Recipe type is required')
     .isIn(['entrée', 'plat', 'dessert'])
     .withMessage('Recipe type must be one of the following: entrée, plat, dessert'),
+  
   handleValidationErrors,
   async (req, res) => {
-    const { title, ingredients, recipeType, description, date } = req.body;
+    const { title, ingredients, type } = req.body;
+    // Correction ici
     try {
-      const id = await Recipe.createRecipe(title, ingredients, recipeType, description, date);
+      const id = await Recipe.createRecipe(title, ingredients, type); // Correction ici
       res.status(201).json({
         message: 'Recipe successfully created!',
         id,
         title,
         ingredients,
-        recipeType,
-        description,
-        date,
+        type, // Correction ici
       });
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -86,11 +85,12 @@ export const createRecipe = [
   },
 ];
 
+
 export const updateRecipe = [
   param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),
   body('title').optional().isString().withMessage('Title must be a string'),
   body('ingredients').optional().isString().withMessage('Ingredients must be a string'),
-  body('recipeType')
+  body('Type')
     .optional()
     .isString()
     .withMessage('Recipe type must be a string')
@@ -101,9 +101,9 @@ export const updateRecipe = [
   handleValidationErrors,
   async (req, res) => {
     const { id } = req.params;
-    const { title, ingredients, recipeType, description, date } = req.body;
+    const { title, ingredients, Type,  } = req.body;
     try {
-      const affectedRows = await Recipe.updateRecipe(id, title, ingredients, recipeType, description, date);
+      const affectedRows = await Recipe.updateRecipe(id, title, ingredients, Type, );
       if (affectedRows === 0) {
         return res.status(404).json({ message: 'Recipe not found' });
       }
