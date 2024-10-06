@@ -97,27 +97,28 @@
     {
       "name": "POST_Recipes",
       "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"title\": \"Poisson fumeé\",\r\n    \"description\": \"poisson\",\r\n    \"date\": \"2024-08-02\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
+          "method": "POST",
+          "header": [],
+          "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Poisson fumeé\",\r\n    \"ingredients\": \"Poisson, épices, huile\",\r\n    \"type\": \"plat\"\r\n}",
+              "options": {
+                  "raw": {
+                      "language": "json"
+                  }
+              }
+          },
+          "url": {
+              "raw": "http://localhost:4000/api/recipes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["api", "recipes"]
           }
-        },
-        "url": {
-          "raw": "http://localhost:4000/api/recipes",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["api", "recipes"]
-        }
       },
       "response": []
-    },
+  },
+  
     {
       "name": "PUT_Recipes",
       "request": {
@@ -125,7 +126,7 @@
           "header": [],
           "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"Poisson fumeé\",\r\n    \"description\": \"poisson-grillé\",\r\n    \"ingredients\": \"Poisson, épices, huile\",\r\n    \"type\": \"plat principal\",\r\n    \"date\": \"2024-08-02\"\r\n}",
+              "raw": "{\r\n    \"title\": \"Poisson fumeé\",\r\n    \"ingredients\": \"Poisson, épices, huile\",\r\n    \"type\": \"plat\"\r\n}",
               "options": {
                   "raw": {
                       "language": "json"
@@ -142,6 +143,7 @@
       },
       "response": []
   },
+  
   
     {
       "name": "DELETE_Recipes",
