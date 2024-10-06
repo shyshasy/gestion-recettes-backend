@@ -1,6 +1,6 @@
 // index.js
 import express from 'express';
-import recetteRoutes from './src/routes/recetteRoutes.js';
+import recetteRoutes from './src/routes/RecetteRoute.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000; // Changez le port ici
