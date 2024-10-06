@@ -30,7 +30,7 @@ npm install
 
 3. Configurer la base de données :
 
-- Ouvrez le fichier de configuration de votre base de données (par exemple config.jsou .env) et mettez à jour les informations de connexion à la base de données (hôte, utilisateur, mot de passe, nom de la base de données) selon vos paramètres locaux.
+- Ouvrez le fichier de configuration de votre base de données (par exemple config.js ou .env) et mettez à jour les informations de connexion à la base de données (hôte, utilisateur, mot de passe, nom de la base de données) selon vos paramètres locaux.
 
 4. Initialiser la base de données :
 
@@ -50,40 +50,6 @@ CREATE TABLE recipes (
 ```bash
 npm start
 ```
-
-
-## Lancer l'application avec Docker
-
-### Étapes pour construire et lancer le conteneur Docker :
-
-1. **Construire l'image Docker :**
-
-   Dans le répertoire où se trouve votre `Dockerfile`, exécutez :
-
-   ```bash
-   docker build -t api_gestion_recette-app.
-
-   ```
-
-2. **Démarrer les services avec Docker Compose :**
-
-   Si vous avez un fichier `docker-compose.yml`, exécutez :
-
-   ```bash
-   docker-compose up
-   ```
-
-3. **Accéder à MySQL dans le conteneur :**
-
-   Vous pouvez accéder à MySQL dans le conteneur avec :
-
-   ```bash
-   docker exec -it <mysql_container_name> mysql -u root -p
-   ```
-
-   Remplacez `<mysql_container_name>` par le nom du conteneur MySQL (par exemple, `gestion_recettes_mysql_1`).
-
-
 
 ## Endpoints de l'API
 
@@ -180,21 +146,37 @@ npm start
 - 404 Not Found : La ressource demandée n'a pas été trouvée.
 - 500 Internal Server Error : Une erreur serveur est survenue.
 
-## Lancer l'application
 
-```bash
-npm start
-```
+## Lancer l'application avec Docker
 
-## Les étapes pour construire et lancer le conteneur Docker:
+### Étapes pour construire et lancer le conteneur Docker :
 
-```bash
-docker compose up 
-```
+1. **Construire l'image Docker :**
 
-```bash
-docker exec -it gestion_recettes mysql -u root -p
-```
+   Dans le répertoire où se trouve votre `Dockerfile`, exécutez :
+
+   ```bash
+   docker build -t api_gestion_recette-app.
+
+   ```
+
+2. **Démarrer les services avec Docker Compose :**
+
+   Si vous avez un fichier `docker-compose.yml`, exécutez :
+
+   ```bash
+   docker-compose up
+   ```
+
+3. **Accéder à MySQL dans le conteneur :**
+
+   Vous pouvez accéder à MySQL dans le conteneur avec :
+
+   ```bash
+   docker exec -it <mysql_container_name> mysql -u root -p
+   ```
+
+   Remplacez `<mysql_container_name>` par le nom du conteneur MySQL (par exemple, `gestion_recettes_db`).
 
 ## Execusion des tests unitaire
 
