@@ -1,4 +1,5 @@
-# gestion-recettes-backend
+# Gestion recettes backend 
+
 
 Cette API permet de gérer des recettes de cuisine, incluant la création, la lecture, la mise à jour et la suppression des recettes (opérations CRUD). L'API utilise une base de données MySQL pour stocker les recettes, et inclut des validations des données grâce à express-validator.
 
@@ -29,7 +30,7 @@ npm install
 
 3. Configurer la base de données :
 
-- Mettre à jour les informations de connexion à la base de données (hôte, utilisateur, mot de passe, nom de la base de données).
+- Ouvrez le fichier de configuration de votre base de données (par exemple config.jsou .env) et mettez à jour les informations de connexion à la base de données (hôte, utilisateur, mot de passe, nom de la base de données) selon vos paramètres locaux.
 
 4. Initialiser la base de données :
 
@@ -49,6 +50,40 @@ CREATE TABLE recipes (
 ```bash
 npm start
 ```
+
+
+## Lancer l'application avec Docker
+
+### Étapes pour construire et lancer le conteneur Docker :
+
+1. **Construire l'image Docker :**
+
+   Dans le répertoire où se trouve votre `Dockerfile`, exécutez :
+
+   ```bash
+   docker build -t api_gestion_recette-app.
+
+   ```
+
+2. **Démarrer les services avec Docker Compose :**
+
+   Si vous avez un fichier `docker-compose.yml`, exécutez :
+
+   ```bash
+   docker-compose up
+   ```
+
+3. **Accéder à MySQL dans le conteneur :**
+
+   Vous pouvez accéder à MySQL dans le conteneur avec :
+
+   ```bash
+   docker exec -it <mysql_container_name> mysql -u root -p
+   ```
+
+   Remplacez `<mysql_container_name>` par le nom du conteneur MySQL (par exemple, `gestion_recettes_mysql_1`).
+
+
 
 ## Endpoints de l'API
 
