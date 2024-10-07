@@ -30,9 +30,13 @@ npm install
 
 ## Configuration de la base de données
 
-1. Ouvrez le fichier de configuration de votre base de données. Cela peut être un fichier `config.js`, `.env`, ou un autre fichier de configuration selon votre structure de projet.
+Suivez les étapes ci-dessous pour configurer et exécuter le projet en local :
 
-2. Mettez à jour les informations de connexion à la base de données avec vos paramètres locaux. Voici un exemple de ce que cela pourrait ressembler dans un fichier `.env` :
+1. Renommer le fichier de configuration
+Repérez le fichier nommé .env.example à la racine du projet et renommez-le en .env.
+
+2. Mise à jour des informations de connexion
+Ouvrez le fichier .env et mettez à jour les informations de connexion à la base de données avec vos propres paramètres. Voici un exemple des configurations à adapter :
 
    
    `DB_HOST=localhost`
@@ -163,18 +167,10 @@ npm start
 
    Dans le répertoire où se trouve votre `Dockerfile`, exécutez :
 
-   ```bash
-   docker build -t api_gestion_recette-app .
-
-   ```
-
-2. **Démarrer les services avec Docker Compose :**
-
-   Si vous avez un fichier `docker-compose.yml`, exécutez :
-
-   ```bash
-   docker-compose up
-   ```
+  
+  ```bash
+  docker-compose up —build
+  ```
 
 3. **Accéder à MySQL dans le conteneur :**
 

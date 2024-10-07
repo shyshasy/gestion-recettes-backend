@@ -1,10 +1,10 @@
-import Recipe from '../src/models/RecipeModel.js';
+import Recipe from '../src/models/Recipe.js';
 
 describe('Recipe tests', () => {
   let recipeId = null;
 
   it('can be create', async () => {
-    const recipe = { title: 'hako', type: 'dessert', ingredients: 'harachude, viande, feuille de hako', };
+    const recipe = { title: 'latchirii et hako', type: 'dessert', ingredients: 'harachude, viande, feuille de hako', };
     const result = await Recipe.createRecipe(
       recipe.title,
       recipe.type,

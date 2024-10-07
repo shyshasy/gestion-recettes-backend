@@ -1,5 +1,5 @@
 import { body, param, validationResult } from 'express-validator';
-import Recipe from '../models/RecipeModel.js';
+import Recipe from '../models/Recipe.js';
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
