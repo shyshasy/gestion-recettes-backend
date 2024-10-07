@@ -19,7 +19,7 @@ git clone https://github.com/shyshasy/gestion-recettes-backend.git
 ```
 
 ```bash
-cd API_gestion_recette
+cd gestion-recettes-backend
 ```
 
 2. Installer les dépendances :
@@ -28,9 +28,17 @@ cd API_gestion_recette
 npm install
 ```
 
-3. Configurer la base de données :
+## Configuration de la base de données
 
-- Ouvrez le fichier de configuration de votre base de données (par exemple config.js ou .env) et mettez à jour les informations de connexion à la base de données (hôte, utilisateur, mot de passe, nom de la base de données) selon vos paramètres locaux.
+1. Ouvrez le fichier de configuration de votre base de données. Cela peut être un fichier `config.js`, `.env`, ou un autre fichier de configuration selon votre structure de projet.
+
+2. Mettez à jour les informations de connexion à la base de données avec vos paramètres locaux. Voici un exemple de ce que cela pourrait ressembler dans un fichier `.env` :
+
+   
+   `DB_HOST=localhost`
+   `DB_USER=your_username`
+   `DB_PASSWORD=your_password`
+   `DB_NAME=gestion_recettes`
 
 4. Initialiser la base de données :
 
