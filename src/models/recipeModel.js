@@ -26,29 +26,52 @@ class Recipe {
   }
   
 
-  static async updateRecipe(id, fieldsToUpdate) {
-    const keys = Object.keys(fieldsToUpdate);
-    const values = Object.values(fieldsToUpdate);
-
+  static async updateRecipe(id, title, ingredients, type, description, date) {
     // Vérifiez si l'ID est valide
     if (!id || typeof id !== 'number') {
         throw new Error('Invalid recipe id');
     }
 
-    if (keys.length === 0) return 0;
+    // Construction dynamique de la requête SQL
+    const updates = [];
+    const values = [];
 
-    
-    const setClause = keys.map(() => `?`).join(', ');
-    
-    
+    if (title) {
+        updates.push('title = ?');
+        values.push(title);
+    }
+    if (ingredients) {
+        updates.push('ingredients = ?');
+        values.push(ingredients);
+    }
+    if (type) {
+        updates.push('type = ?');
+        values.push(type);
+    }
+    if (description) {
+        updates.push('description = ?');
+        values.push(description);
+    }
+    if (date) {
+        updates.push('date = ?');
+        values.push(date);
+    }
+
+    // Si aucun champ à mettre à jour, retournez 0
+    if (updates.length === 0) {
+        return 0;
+    }
+
+    // Ajoutez l'ID à la fin des valeurs pour la clause WHERE
     values.push(id);
-    
-    
-    const sql = `UPDATE recipes SET ${keys.join(' = ?, ')} = ? WHERE id = ?`;
 
-   
-    const [result] = await db.query(sql, [...values]);
+    // Construire la requête SQL de mise à jour
+    const sql = `UPDATE recipes SET ${updates.join(', ')} WHERE id = ?`;
 
+    // Exécution de la requête SQL avec les valeurs
+    const [result] = await db.query(sql, values);
+
+    // Retourner le nombre de lignes affectées
     return result.affectedRows;
 }
 
