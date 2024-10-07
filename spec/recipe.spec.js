@@ -4,11 +4,11 @@ describe('Recipe tests', () => {
   let recipeId = null;
 
   it('can be create', async () => {
-    const recipe = { title: 'crepe', description: 'dessert', date: '2024-6-9' };
+    const recipe = { title: 'hako', type: 'dessert', ingredients: 'harachude, viande, feuille de hako', };
     const result = await Recipe.createRecipe(
       recipe.title,
-      recipe.description,
-      recipe.date
+      recipe.type,
+      recipe.ingredients
     );
     expect(result).not.toBeNull();
   });
@@ -17,13 +17,13 @@ describe('Recipe tests', () => {
     try {
       const recipe = {
         title: null,
-        description: 'dessert',
-        date: '2024-09-08',
+        type: 'dessert',
+        ingredients: 'Farine, lait, oeufs',
       };
       const result = await Recipe.createRecipe(
         recipe.title,
-        recipe.description,
-        recipe.date
+        recipe.type,
+        recipe.ingredients
       );
       recipeId = result.insertId;
       const recipeCreated = await Recipe.getRecipeById(recipeId);
@@ -40,16 +40,16 @@ describe('Recipe tests', () => {
   });
 
   it('Can get a recipe by id', async () => {
-    const existingRecipeId = 2; // Utilisez un ID qui existe
+    const existingRecipeId = 2; 
     const recipe = await Recipe.getRecipeById(existingRecipeId);
-    expect(recipe).not.toBeNull(); // Vérifiez que le résultat n'est pas null
-    expect(recipe.id).toBe(existingRecipeId); // Vérifiez que l'ID est correct
+    expect(recipe).not.toBeNull(); 
+    expect(recipe.id).toBe(existingRecipeId); 
   });
   
   it('Returns null for a non-existent recipe id', async () => {
-    const nonExistentId = 110; // Un ID qui n'existe pas
+    const nonExistentId = 110; 
     const recipe = await Recipe.getRecipeById(nonExistentId);
-    expect(recipe).toBeNull(); // Vérifiez que le résultat est bien null
+    expect(recipe).toBeNull(); 
   });
   
   it('can be update', async () => {
@@ -58,13 +58,13 @@ describe('Recipe tests', () => {
     expect(existingRecipe).not.toBeNull(); // Vérifiez que la recette existe
     
     const updateData = {
-        title: 'Crê chocolat', // Changer le titre
+        title: 'Crê chocolat', 
         ingredients: 'Farine, lait, oeufs, chocolat, sucre',
         type: 'dessert'
     };
     
-    const result = await Recipe.updateRecipe(2, updateData); // Utilisez l'ID de la recette existante
-    expect(result).toBe(1); // Vérifiez que l'update a bien été effectué
+    const result = await Recipe.updateRecipe(2, updateData); 
+    expect(result).toBe(1); 
 });
 
   
