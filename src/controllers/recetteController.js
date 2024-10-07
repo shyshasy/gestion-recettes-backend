@@ -88,11 +88,36 @@ export const createRecipe = [
 
 export const updateRecipe = [
   param('id').isInt({ min: 1 }).withMessage('ID must be a positive integer'),
-  // Les autres validations ici
+
+  // Validation du titre de la recette
+  body('title')
+    .isString()
+    .isLength({ min: 5, max: 100 })
+    .withMessage('Title must be a string between 5 and 100 characters')
+    .notEmpty()
+    .withMessage('Title is required'),
+
+  // Validation des ingrédients
+  body('ingredients')
+    .isString()
+    .isLength({ min: 10, max: 500 })
+    .withMessage('Ingredients must be a string between 10 and 500 characters')
+    .notEmpty()
+    .withMessage('Ingredients are required'),
+
+  // Validation du type de recette
+  body('Type')
+    .isString()
+    .isIn(['entrée', 'plat', 'dessert'])
+    .withMessage('Type must be one of the following: entrée, plat, dessert')
+    .notEmpty()
+    .withMessage('Type is required'),
+
   handleValidationErrors, // S'assure que toutes les erreurs de validation sont traitées avant la suite
+
   async (req, res) => {
     const { id } = req.params;  // Assurez-vous que l'ID est bien récupéré depuis req.params
-    const { title, ingredients, Type, description, date } = req.body;
+    const { title, ingredients, Type } = req.body;
 
     // Vérifiez l'ID avant d'appeler updateRecipe
     if (isNaN(id)) {
@@ -101,7 +126,7 @@ export const updateRecipe = [
 
     // Créer un objet des champs fournis pour la mise à jour
     try {
-      const affectedRows = await Recipe.updateRecipe(Number(id), title, ingredients, Type, description, date);
+      const affectedRows = await Recipe.updateRecipe(Number(id), title, ingredients, Type);
       if (affectedRows === 0) {
         return res.status(404).json({ message: 'Recipe not found' });
       }

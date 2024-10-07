@@ -156,7 +156,7 @@ npm start
    Dans le répertoire où se trouve votre `Dockerfile`, exécutez :
 
    ```bash
-   docker build -t api_gestion_recette-app.
+   docker build -t api_gestion_recette-app .
 
    ```
 
